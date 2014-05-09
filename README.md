@@ -19,6 +19,7 @@ Documentation: http://tosrus.frebsite.nl
 + Very customizable through a series of options with device dependent defaults.
 + Supports showing images, video's and HTML content.
 + Viewport-scale dependent buttons and caption sizes.
++ Perfect match with plugins like Isotope (show/hide elements)
 
 ### More info
 Please visit http://tosrus.frebsite.nl
