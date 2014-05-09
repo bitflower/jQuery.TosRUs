@@ -579,7 +579,6 @@
 
 		    // Clear "old" slides
 		    this.nodes.$wrpr.empty();
-		    //this.nodes.$sldr.empty();
 
             // re-load anchors
 		    this._finalSetup();

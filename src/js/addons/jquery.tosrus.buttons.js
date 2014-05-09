@@ -59,8 +59,7 @@
 			{
 				'prev'	: 'prev',
 				'next'	: 'next',
-				'close': 'clse',
-                'wrpr' : 'wrpr'
+				'close': 'clse'
 			},
 			function( btn, value )
 			{
@@ -75,7 +74,7 @@
 					//	Inline buttons
 					if ( typeof btns[ btn ] == 'string' && btns[ btn ] == 'inline' )
 					{
-					    if (that.vars.fixed && btn != 'close' && btn != 'wrpr')
+					    if (that.vars.fixed && btn != 'close' )
 						{
 							that.nodes.$slides
 								.on( _e.loading,
