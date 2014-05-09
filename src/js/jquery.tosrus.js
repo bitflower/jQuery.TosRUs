@@ -61,7 +61,7 @@
 
 			//	Add markup
 			this.nodes.$wrpr = $('<div class="' + _c.wrapper + '" />');
-			this.nodes.$sldr = $('<div class="' + _c.slider + '" />').appendTo( this.nodes.$wrpr );
+			//this.nodes.$sldr = $('<div class="' + _c.slider + '" />').appendTo( this.nodes.$wrpr );
 	
 			this.nodes.$wrpr
 				.addClass( this.vars.fixed ? _c.fixed : _c.inline )
@@ -123,56 +123,7 @@
 					);
 			}
 
-			//	Nodes
-			this.nodes.$anchors = this._initAnchors();
-			this.nodes.$slides  = this._initSlides();
-
-			//	Slides
-			this.slides.total	= this.nodes.$slides.length;
-			this.slides.visible	= this.opts.slides.visible;
-			this.slides.index	= 0;
-
-			//	Vars
-			this.vars.opened	= true;
-
-
-			//	Init addons
-			for ( var a = 0; a < $[ _PLUGIN_ ].addons.length; a++ )
-			{
-				if ( $.isFunction( this[ '_addon_' + $[ _PLUGIN_ ].addons[ a ] ] ) )
-				{
-					this[ '_addon_' + $[ _PLUGIN_ ].addons[ a ] ]();
-				}
-			}
-			for ( var u = 0; u < $[ _PLUGIN_ ].ui.length; u++ )
-			{
-				if ( this.nodes.$wrpr.find( '.' + _c[ $[ _PLUGIN_ ].ui[ u ] ] ).length )
-				{
-					this.nodes.$wrpr.addClass( _c( 'has-' + $[ _PLUGIN_ ].ui[ u ] ) );
-				}
-			}
-
-
-			//	Start
-			if ( this.vars.fixed )
-			{
-				this.nodes.$wrpr.appendTo( _g.$body );
-				this.close( true );
-			}
-			else
-			{
-				this.nodes.$wrpr.appendTo( this.opts.wrapper.target );
-
-				if ( this.opts.show )
-				{
-					this.vars.opened = false;
-					this.open( 0, true );
-				}
-				else
-				{
-					this.close( true );
-				}
-			}
+			this._finalSetup();
 		},
 
 
@@ -570,6 +521,69 @@
 			}
 			this.opts.slides.slide		=   _f.complNumber( this.opts.slides.slide, this.opts.slides.visible );
 			this.opts.slides.offset 	= ( _f.isPercentage( this.opts.slides.offset ) ) ? _f.getPercentage( this.opts.slides.offset ) : _f.complNumber( this.opts.slides.offset, 0 );
+		},
+
+		_finalSetup: function () {
+
+		    this.nodes.$sldr = $('<div class="' + _c.slider + '" />').appendTo(this.nodes.$wrpr);
+
+		    //	Nodes
+		    this.nodes.$anchors = this._initAnchors();
+		    this.nodes.$slides = this._initSlides();
+
+		    //	Slides
+		    this.slides.total = this.nodes.$slides.length;
+		    this.slides.visible = this.opts.slides.visible;
+		    this.slides.index = 0;
+
+		    //	Vars
+		    this.vars.opened = true;
+
+
+		    //	Init addons
+		    for (var a = 0; a < $[_PLUGIN_].addons.length; a++) {
+		        if ($.isFunction(this['_addon_' + $[_PLUGIN_].addons[a]])) {
+		            this['_addon_' + $[_PLUGIN_].addons[a]]();
+		        }
+		    }
+		    for (var u = 0; u < $[_PLUGIN_].ui.length; u++) {
+		        if (this.nodes.$wrpr.find('.' + _c[$[_PLUGIN_].ui[u]]).length) {
+		            this.nodes.$wrpr.addClass(_c('has-' + $[_PLUGIN_].ui[u]));
+		        }
+		    }
+
+
+		    //	Start
+		    if (this.vars.fixed) {
+		        this.nodes.$wrpr.appendTo(_g.$body);
+		        this.close(true);
+		    }
+		    else {
+		        this.nodes.$wrpr.appendTo(this.opts.wrapper.target);
+
+		        if (this.opts.show) {
+		            this.vars.opened = false;
+		            this.open(0, true);
+		        }
+		        else {
+		            this.close(true);
+		        }
+		    }
+		},
+
+	    // PUBLIC FUNCTIONS
+		reinit: function ( ) {
+
+            // Reset $node to actual selection / DOM condition
+		    this.$node = $(this.$node.selector);
+
+		    // Clear "old" slides
+		    this.nodes.$wrpr.empty();
+		    //this.nodes.$sldr.empty();
+
+            // re-load anchors
+		    this._finalSetup();
+
 		}
 	};
 
@@ -595,7 +609,7 @@
 		var clss = new $[ _PLUGIN_ ]( this, opts, conf );
 
 		this.data( _PLUGIN_, clss );
-		return clss.nodes.$wrpr;
+		return clss;
 	};
 
 

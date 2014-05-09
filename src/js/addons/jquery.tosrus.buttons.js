@@ -47,6 +47,8 @@
 		{
  			btns.close = this.vars.fixed;
 		}
+		btns.prev = true;
+		btns.next = true;
 		if ( this.nodes.$slides.length < 2 )
 		{
 			btns.prev = false;
@@ -57,16 +59,23 @@
 			{
 				'prev'	: 'prev',
 				'next'	: 'next',
-				'close'	: 'clse'
+				'close': 'clse',
+                'wrpr' : 'wrpr'
 			},
 			function( btn, value )
 			{
 				if ( btns[ btn ] )
 				{
+
+				    // Wrapper close
+				    //if (btn == 'wrpr') {
+				    //    bindEvent(that.nodes.$wrpr, that.nodes.$wrpr, btn, 1);
+				    //}
+
 					//	Inline buttons
 					if ( typeof btns[ btn ] == 'string' && btns[ btn ] == 'inline' )
 					{
-						if ( that.vars.fixed && btn != 'close' )
+					    if (that.vars.fixed && btn != 'close' && btn != 'wrpr')
 						{
 							that.nodes.$slides
 								.on( _e.loading,
@@ -82,7 +91,7 @@
 										}
 									}
 								);
-						}
+					    }
 					}
 
 					//	External buttons

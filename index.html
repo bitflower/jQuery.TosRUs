@@ -8,7 +8,7 @@
 
 		<!-- include jQuery -->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		
+
 		<!-- for dragging/swiping/pinching, include hammer.js -->
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.5/jquery.hammer.min.js"></script>
 
@@ -16,7 +16,10 @@
 		<script type="text/javascript" language="javascript" src="lib/FlameViewportScale.js"></script>
 
 		<!-- include Tos "R"Us -->
-		<script type="text/javascript" language="javascript" src="src/js/jquery.tosrus.min.all.js"></script>
+		<!--<script type="text/javascript" language="javascript" src="src/js/jquery.tosrus.min.all.js"></script>-->
+		<script type="text/javascript" language="javascript" src="src/js/jquery.tosrus.js"></script>
+		<script type="text/javascript" language="javascript" src="src/js/media/jquery.tosrus.image.min.js"></script>
+		<script type="text/javascript" language="javascript" src="src/js/addons/jquery.tosrus.buttons.js"></script>
 		<link type="text/css" media="all" rel="stylesheet" href="src/css/jquery.tosrus.all.css" />
 
 		<!-- fire the plugin onDocumentReady -->
@@ -27,6 +30,9 @@
 					pagination	: {
 						add			: true,
 						type		: 'thumbnails'
+					},
+					buttons 	: {
+						clse		: true
 					}
 				});
 
@@ -59,6 +65,31 @@
 					slides		: {
 						scale		: 'fill'
 					}
+				});
+
+				var $trX6 = $('#example-6 a:visible').tosrus({
+					pagination	: {
+						add			: true,
+						type		: 'thumbnails'
+					},
+					buttons 	: {
+						clse		: true
+					}
+				});
+
+				$('#X6hide').click(function(e) {
+                    e.preventDefault();
+					$('#example-6 a').hide();
+                    $('#example-6 a').first().show();
+					$trX6.reinit();
+
+				});
+
+				$('#X6show').click(function(e) {
+                    e.preventDefault();
+                    $('#example-6 a').show();
+					$trX6.reinit();
+
 				});
 
 			});
@@ -299,10 +330,33 @@ $(&quot;#example&quot;).tosrus({
    }
 });
 </pre>
+				<br />
+				<p>This demo shows the reinit() function of the slider. After the slider has been initialized on a set of visible elements we hide one. Then we let the slider adapt to the new set of visibles. See how the pagination and the buttons adapt as well: <a href="#" id="X6hide">Hide 3 of 4</a> <a href="#" id="X6show">Show all</a></p>
+				<div id="example-6" class="thumbs">
+					<a href="http://lorempixel.com/1200/675/cats/5/?img.jpg">
+						<img src="http://lorempixel.com/130/130/cats/5/" /></a>
+					<a href="http://lorempixel.com/1200/675/cats/6/?img.jpg">
+						<img src="http://lorempixel.com/130/130/cats/6/" /></a>
+					<a href="http://lorempixel.com/1200/675/cats/7/?img.jpg">
+						<img src="http://lorempixel.com/130/130/cats/7/" /></a>
+					<a href="http://lorempixel.com/1200/675/cats/8/?img.jpg">
+						<img src="http://lorempixel.com/130/130/cats/8/" /></a>
+				</div>
+<pre>
+$(&quot;#example&quot;).tosrus({
+    pagination	: {
+	   add			: true,
+	   type		: &quot;thumbnails&quot;
+    },
+    buttons 	: {
+    	clse		: true
+    }
+});
+</pre>
 			</section>
-			
+
 			<hr />
-			
+
 			<section>
 				<h4>About the images</h4>
 				<p>All images on this demo-page are hosted on <a href="http://lorempixel.com/" target="_blank">lorempixel.com</a>.<br />

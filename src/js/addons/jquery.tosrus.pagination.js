@@ -48,7 +48,7 @@
 		}
 		//	/DEPRECATED
 
-
+		pagr.add = true;
 		if ( this.nodes.$slides.length < 2 )
 		{
 			pagr.add = false;
@@ -66,7 +66,7 @@
 			}
 			else
 			{
-				this.nodes.$pagr = $('<div class="' + _c.pagination + ' ' + _c[ pagr.type ] + '" />').appendTo( this.nodes.$wrpr );
+			    this.nodes.$pagr = $('<div class="' + _c.pagination + ' ' + _c[ pagr.type ] + '" />').appendTo( this.nodes.$wrpr );
 				if ( !this.nodes.$uibg )
 				{
 					this.nodes.$uibg = $('<div class="' + _c.uibg + '" />').prependTo( this.nodes.$wrpr );
@@ -103,6 +103,9 @@
 						break;
 				}
 			}
+
+		    // Clear Pagination first
+			that.nodes.$pagr.empty();
 
 			this.nodes.$slides
 				.each(
